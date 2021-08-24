@@ -6,4 +6,64 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background-color: rgb(255, 227, 217);
+}
+
+h1 {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+nav {
+  text-align: start;
+  padding: 1px 0px 1px 10px;
+  color: white;
+  background-color: coral;
+}
+
+div {
+  margin: 0;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-user input {
+  width: 300px;
+  font-size: large;
+  margin-bottom: 10px;
+  border: none;
+  color: white;
+  background-color: coral;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.about-user input::placeholder {
+  color: white;
+}
+
+.card-info {
+  width: 300px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: none;
+  background-color: coral;
+  border-radius: 4px;
+}
+
+button {
+  background-color: coral;
+  color: white;
+  padding: 8px 28px 8px 28px;
+  border-radius: 5px;
+  border: none;
 }
