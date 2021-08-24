@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -26,8 +27,28 @@ const PaymentForm = () => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const [name, setName] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
     const [email, setEmail] = useState('');
+    const [error, setError] = useState(false);
+
+    let history = useHistory();
+
+    useEffect(() => {
+        window
+          .fetch("http://localhost:4242/payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({items: [{ id: "Introspekt App" }]})
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(data => {
+            setClientSecret(data.clientSecret);
+          });
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -36,24 +57,27 @@ const PaymentForm = () => {
             return;
         }
 
-        const cardElement = elements.getElement(CardElement);
-
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-        });
-
         if (error) {
-            console.log('[error]', error);
+            setError(true);
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            const payload = await stripe.confirmCardPayment(clientSecret, {
+                receipt_email: email,
+                payment_method: {
+                  card: elements.getElement(CardElement)
+                }
+            });
+
+            if (payload.error) {
+                setError(true)
+            } else {
+                history.push("/thankyou");
+            }
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="about-user">
-                <input type="text" value={name} onChange={(e) => {setName(e.value)}} placeholder="Name" required></input>
                 <input type="text" value={email} onChange={(e) => {setEmail(e.value)}} placeholder="Email" required></input>
             </div>
             <div className="card-info">
@@ -62,6 +86,7 @@ const PaymentForm = () => {
             <button type="submit" disabled={!stripe}>
                 Pay
             </button>
+            {error? <div><p>Sorry, something broke! </p><br></br><p> (╯°□°）╯︵ ┻━┻ </p></div>: <p></p>}
         </form>
     );
 }

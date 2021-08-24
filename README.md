@@ -4,8 +4,6 @@ Facilitating payments using the Stripe API
 
 ---
 
-<br>
-
 #### **Tech Stack**
 
 | Database |    Backend     | Frontend           |
