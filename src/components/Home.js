@@ -1,9 +1,12 @@
 import Checkout from "./Checkout";
+import ProductPage from "./products/Product";
 
 const Home = () => {
     return (
         <div>
-            <Checkout></Checkout>
+            { /* Image from https://lukaszadam.com/illustrations */ }
+            <img className="main-image" src="storefront_illustration.svg" alt="Storefront Image"></img>
+            <ProductPage></ProductPage>
         </div>
     );
 }

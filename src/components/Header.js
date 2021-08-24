@@ -1,7 +1,9 @@
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
     return (
         <nav>
-            <h1>ecomm</h1>
+            <h1><NavLink to="/">ecomm</NavLink></h1>
         </nav>
     );
 }

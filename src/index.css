@@ -9,7 +9,13 @@ body {
   background-color: rgb(255, 227, 217);
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 h1 {
+  margin: 5px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -23,6 +29,11 @@ nav {
 div {
   margin: 0;
   text-align: center;
+}
+
+.main-image {
+  margin: 20px;
+  width: 50%;
 }
 
 form {
@@ -61,9 +72,24 @@ form {
 }
 
 button {
+  cursor: pointer;
   background-color: coral;
   color: white;
   padding: 8px 28px 8px 28px;
   border-radius: 15px;
   border: none;
+}
+
+.product-array {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 25px;
+  width: max-content;
+  border-radius: 2px;
+  background-color: white;
 }

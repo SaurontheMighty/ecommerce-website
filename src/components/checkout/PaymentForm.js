@@ -23,7 +23,7 @@ const CARD_OPTIONS = {
 }
 
 
-const PaymentForm = () => {
+const PaymentForm = (productId) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -40,7 +40,7 @@ const PaymentForm = () => {
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({items: [{ id: "Introspekt App" }]})
+            body: JSON.stringify({items: [{ id: productId.item }]})
           })
           .then(res => {
             return res.json();
