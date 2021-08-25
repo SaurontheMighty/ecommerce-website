@@ -15,14 +15,14 @@ const ProductPage = () => {
             name: "DuctivityPro Extension",
             description: "Escape the blackholes of the internet.",
             price: 25,
-            rating: 4.7
+            rating: 5
         },
         {
             id: 567843,
             name: "Adventures of Fireball",
             description: "Not an infinite runner.",
             price: 25,
-            rating: 4.9
+            rating: 5
         }
     ]
 
@@ -31,9 +31,9 @@ const ProductPage = () => {
             {products.map((product) => (
                 <div className='card'>
                     <h3>{product.name}</h3>
-                    <p className="price">{product.price}</p>
-                    <p>{product.description}</p>
                     <p>{product.rating}/5</p>
+                    <p>{product.description}</p>
+                    <p className="price">${product.price}</p>
                     <Link to={{
                         pathname: '/checkout',
                         state: { 

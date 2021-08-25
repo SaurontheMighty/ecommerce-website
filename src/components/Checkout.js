@@ -1,6 +1,6 @@
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PaymentForm from './checkout/PaymentForm';
 
 const Checkout = () => {
@@ -10,10 +10,25 @@ const Checkout = () => {
 
     return (
         <Elements stripe={stripePromise}>
-            <h1>Checkout</h1>
-            <p>Item Purchased: {state.name}</p>
-            <PaymentForm item = {state.id}></PaymentForm>
-            <p style={{fontStyle:"italic"}}>Payment facilitated by Stripe</p>
+            {state? 
+            <div>
+                <br></br>
+                <h1>Checkout</h1>
+                <p>Item Purchased: {state? state.name: "No items"}</p>
+                <PaymentForm item = {state? state.id: "None"}></PaymentForm>
+                <p style={{fontStyle:"italic"}}>Payment facilitated by Stripe</p>
+            </div>
+            :
+            <div>
+                <h1>Checkout</h1>
+                <p>No Items in Cart</p>
+                <Link style={{
+                    cursor:"pointer",
+                    color:"Black",
+                    textDecoration:"underline"
+                }} to='/'>Go Home</Link>
+            </div>
+            }
         </Elements>
     );
 }

@@ -9,7 +9,12 @@ body {
   background-color: rgb(255, 227, 217);
 }
 
+img {
+  margin-top: 5px;
+}
+
 a {
+  all: unset;
   text-decoration: none;
   color: white;
 }
@@ -21,9 +26,12 @@ h1 {
 
 nav {
   text-align: start;
-  padding: 1px 0px 1px 10px;
+  padding: 1px 10px;
   color: white;
   background-color: coral;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 div {
