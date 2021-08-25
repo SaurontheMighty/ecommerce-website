@@ -1,4 +1,7 @@
 /venv
+/backend/database.db
+/backend/__pycache__
+/__pycache__
 
 # dependencies
 /node_modules

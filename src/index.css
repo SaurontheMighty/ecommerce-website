@@ -42,6 +42,7 @@ div {
 .main-image {
   margin: 20px;
   width: 50%;
+  max-width: 500px;
 }
 
 form {
