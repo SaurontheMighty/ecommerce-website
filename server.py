@@ -3,7 +3,6 @@ from backend.models import Product
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
-from flask_sqlalchemy import SQLAlchemy
 import stripe
 import json
 
@@ -12,12 +11,14 @@ app = create_app()
 api = Api(app)
 cors = CORS(app)
 
-product_put_args = reqparse.RequestParser()
-product_put_args.add_argument(
+product_args = reqparse.RequestParser()
+product_args.add_argument(
     "name", type=str, help="Please supply a Name", required=True)
-product_put_args.add_argument(
+product_args.add_argument(
+    "description", type=str, help="Please supply a Description", required=True)
+product_args.add_argument(
     "rating", type=int, help="Please supply a Rating", required=True)
-product_put_args.add_argument(
+product_args.add_argument(
     "price", type=int, help="Please supply a Price", required=True)
 
 
@@ -56,16 +57,17 @@ class Products(Resource):
     def get(self):
 
         result = Product.query.all()
-        print(result)
         return result, 200
 
-    # @marshal_with(product_resource_fields)
-    # def post(self, id):
-    #     args = product_put_args.parse_args()
-    #     product = Product(
-    #         id=id, name=args['name'], description=args['description'], rating=args['rating'], price=args['price'])
-    #     db.session.add(product)
-    #     return product, 201
+    @marshal_with(product_resource_fields)
+    def post(self):
+        args = product_args.parse_args()
+        print(args)
+        product = Product(
+            name=args['name'], description=args['description'], rating=args['rating'], price=args['price'])
+        db.session.add(product)
+        db.session.commit()
+        return product, 201
 
 
 api.add_resource(Products, '/api/products/')

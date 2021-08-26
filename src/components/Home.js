@@ -1,7 +1,7 @@
-import Checkout from "./Checkout";
 import ProductPage from "./products/Product";
 
 const Home = () => {
+
     return (
         <div>
             { /* Image from https://lukaszadam.com/illustrations */ }

@@ -35,7 +35,7 @@ const PaymentForm = (productId) => {
 
     useEffect(() => {
         window
-          .fetch("http://localhost:4242/payment", {
+          .fetch("http://localhost:5000/payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
