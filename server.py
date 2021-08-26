@@ -32,12 +32,17 @@ product_resource_fields = {
 
 
 def calculate_order_amount(items):
+    sum = 0
     print(items)
-    return 100
+    for item in items:
+        sum += Product.query.get(item).price
+
+    print(sum)
+    return sum
 
 
-@app.route('/payment', methods=['POST'])
-@cross_origin()
+@ app.route('/payment', methods=['POST'])
+@ cross_origin()
 def create_payment():
     try:
         data = json.loads(request.data)
@@ -53,13 +58,13 @@ def create_payment():
 
 
 class Products(Resource):
-    @marshal_with(product_resource_fields)
+    @ marshal_with(product_resource_fields)
     def get(self):
 
         result = Product.query.all()
         return result, 200
 
-    @marshal_with(product_resource_fields)
+    @ marshal_with(product_resource_fields)
     def post(self):
         args = product_args.parse_args()
         print(args)

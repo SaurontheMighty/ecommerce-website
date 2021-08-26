@@ -12,14 +12,14 @@ const Checkout = () => {
         <Elements stripe={stripePromise}>
             {state? 
             <div>
-                <br></br>
+                <br />
                 <h1>Checkout</h1>
-                <p>Item Purchased: {state? state.name: "No items"}</p>
-                <PaymentForm item = {state? state.id: "None"}></PaymentForm>
+                <PaymentForm items = {state.cart}></PaymentForm>
                 <p style={{fontStyle:"italic"}}>Payment facilitated by Stripe</p>
             </div>
             :
             <div>
+                <br />
                 <h1>Checkout</h1>
                 <p>No Items in Cart</p>
                 <Link style={{

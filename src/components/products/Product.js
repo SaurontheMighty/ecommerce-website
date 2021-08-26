@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductPage = () => {
+const ProductPage = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
 
@@ -22,14 +22,7 @@ const ProductPage = () => {
                     <p>{product.rating}/5</p>
                     <p>{product.description}</p>
                     <p className="price">${product.price}</p>
-                    <Link to={{
-                        pathname: '/checkout',
-                        state: { 
-                            id: product.id ,
-                            name: product.name
-                        }
-                        }}><button>Buy Now</button>
-                    </Link>
+                    <button onClick={() => addToCart(product.id)}>Add to Cart</button>
                 </div>
             ))}
         </div>

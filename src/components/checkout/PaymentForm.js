@@ -23,7 +23,7 @@ const CARD_OPTIONS = {
 }
 
 
-const PaymentForm = (productId) => {
+const PaymentForm = ({items}) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -40,7 +40,7 @@ const PaymentForm = (productId) => {
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({items: [{ id: productId.item }]})
+            body: JSON.stringify({items: items})
           })
           .then(res => {
             return res.json();
@@ -77,6 +77,7 @@ const PaymentForm = (productId) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <p>Buying {items.length} items</p>
             <div className="about-user">
                 <input type="text" value={email} onChange={(e) => {setEmail(e.value)}} placeholder="Email" required></input>
             </div>
