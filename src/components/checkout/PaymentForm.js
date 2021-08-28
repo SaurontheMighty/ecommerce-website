@@ -28,6 +28,7 @@ const PaymentForm = ({items}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('');
+    const [total, setTotal] = useState(0);
     const [email, setEmail] = useState('');
     const [error, setError] = useState(false);
 
@@ -47,6 +48,7 @@ const PaymentForm = ({items}) => {
           })
           .then(data => {
             setClientSecret(data.clientSecret);
+            setTotal(data.total)
           });
     }, []);
 
@@ -78,6 +80,7 @@ const PaymentForm = ({items}) => {
     return (
         <form onSubmit={handleSubmit}>
             <p>Buying {items.length} items</p>
+            <p>Total ${total}</p>
             <div className="about-user">
                 <input type="text" value={email} onChange={(e) => {setEmail(e.value)}} placeholder="Email" required></input>
             </div>

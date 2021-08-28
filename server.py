@@ -46,12 +46,14 @@ def calculate_order_amount(items):
 def create_payment():
     try:
         data = json.loads(request.data)
+        calc_amt = calculate_order_amount(data['items'])
         intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(data['items']),
+            amount=calc_amt,
             currency='usd'
         )
         return jsonify({
-            'clientSecret': intent['client_secret']
+            'clientSecret': intent['client_secret'],
+            'total': calc_amt
         })
     except Exception as e:
         return jsonify(error=str(e)), 403

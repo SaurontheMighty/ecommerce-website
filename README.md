@@ -1,6 +1,6 @@
 # E-Commerce Website
 
-Facilitating payments using the Stripe API
+An e-commerce website where customers can browse products, add interesting items to the cart and checkout. Payment is facilitated by the Stripe API. The products are fetched from a Python Flask backend and displayed in a React single page application.
 
 ---
 
